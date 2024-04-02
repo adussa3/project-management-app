@@ -1,9 +1,12 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import Button from "./Button.jsx";
 import Input from "./Input.jsx";
 import Modal from "./Modal.jsx";
+import { ProjectsContext } from "../store/ProjectsContext.jsx";
 
-export default function NewProject({ onAdd, onCancel }) {
+export default function NewProject() {
+    const { onAddProject, onCancelAddProject } = useContext(ProjectsContext);
+
     const modal = useRef();
     const title = useRef();
     const description = useRef();
@@ -29,7 +32,7 @@ export default function NewProject({ onAdd, onCancel }) {
             dueDate: enteredDueDate,
         };
 
-        onAdd(newProject);
+        onAddProject(newProject);
     };
 
     return (
@@ -47,7 +50,7 @@ export default function NewProject({ onAdd, onCancel }) {
             <div className="w-[35rem] mt-16">
                 <menu className="flex items-center justify-end gap-4 my-4">
                     <li>
-                        <button className="text-stone-800 hover:text-stone-950" onClick={onCancel}>
+                        <button className="text-stone-800 hover:text-stone-950" onClick={onCancelAddProject}>
                             Cancel
                         </button>
                     </li>
